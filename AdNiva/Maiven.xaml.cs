@@ -23,13 +23,13 @@ namespace AdNiva
     {
         Label start_ads = new Label();
         Label start_info = new Label();
+        VkAPI API = new VkAPI(Properties.Settings.Default.AccessToken);
         public Maiven()
         {
             InitializeComponent();
             this.WindowState = WindowState.Maximized;
             
             //Запрос фотографии и имени пользователя
-            VkAPI API = new VkAPI(Properties.Settings.Default.AccessToken);
             Dictionary<string, string> UserInfo = API.GetUserInfo();
             UserName.Content = UserInfo["first_name"] + " " + UserInfo["last_name"];
             WebClient Downloader = new WebClient();
@@ -78,6 +78,19 @@ namespace AdNiva
 
             //Получение общей статистики
             Budget.Content = API.GetBudget().ToString();
+
+            //Получение кампаний из кабинета
+            GetCampaingResponse load = API.GetCampaings();
+            if (load.response != null)
+            {
+                for (int i = 0; i < load.response.Count; i++)
+                {
+                    CampaingViewer viewer = new CampaingViewer(load.response[i].id);
+                    viewer.Click += Choose_Camp;
+                    viewer.campaingTitle.Content = load.response[i].name;
+                    CampaingStack.Children.Add(viewer);
+                }
+            }
         }
 
         private void UserIcon_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)

@@ -15,9 +15,9 @@ namespace AdNiva
     /// </summary>
     public class Error
     {
-        public int error_code;
-        public string error_message;
-        public ErrorRequestParams[] request_params;
+        public int error_code { get; set; }
+        public string error_msg { get; set; }
+        public List<ErrorRequestParams> request_params { get; set; }
     } 
     /// <summary>
     /// Вспомогательные функции
@@ -39,11 +39,19 @@ namespace AdNiva
             Int32 UnixTime = (Int32)(new DateTime(year, month, day, h, m, 0).Subtract(new DateTime(1970, 1, 1)).TotalSeconds);
             return UnixTime;
         }
+        public HttpRequest CreateHttpRequest(string cabID, string APIV, string accessToken)
+        {
+            HttpRequest Request = new HttpRequest();
+            Request.AddUrlParam("account_id", cabID);
+            Request.AddUrlParam("access_token", accessToken);
+            Request.AddUrlParam("v", APIV);
+            return Request;
+        }
     }
     public class ErrorRequestParams
     {
-        public string key;
-        public string value;
+        public string key { get; set; }
+        public string value { get; set; }
     }
   
     // Классы, обеспечивающие корректное составление запросов к серверу
@@ -57,12 +65,34 @@ namespace AdNiva
     
     public class CreateCampaingResponse
     {
-        public List<Response> response { get; set; }
+        public List<CreateCampaingResponseBody> response { get; set; }
+        public Error error { get; set; }
     }
 
-    public class Response
+    public class CreateCampaingResponseBody
     {
         public string id { get; set; }
+    }
+    /// <summary>
+    /// Сериализованные данные от метода GetCampaings
+    /// </summary>
+    public class GetCampaingResponse
+    {
+        public List<GetCampaingResponseBody> response { get; set; }
+        public Error error { get; set; }
+    }
+    public class GetCampaingResponseBody
+    {
+            public int id { get; set; }
+            public string type { get; set; }
+            public string name { get; set; }
+            public int status { get; set; }
+            public string day_limit { get; set; }
+            public string all_limit { get; set; }
+            public string start_time { get; set; }
+            public string stop_time { get; set; }
+            public string create_time { get; set; }
+            public string update_time { get; set; }
     }
 
     public class CreateCampaignData
@@ -312,7 +342,6 @@ namespace AdNiva
         /// <returns></returns>
         public CreateCampaingResponse CreateCampaign(CreateCampaignData[] Cdata)
         {
-            string json = "";
             string data;
             HttpRequest Request = new HttpRequest();
             Request.AddUrlParam("account_id", _CABID);
@@ -320,10 +349,16 @@ namespace AdNiva
             Request.AddUrlParam("data", data);
             Request.AddUrlParam("access_token", _Token);
             Request.AddUrlParam("v", __API_VERSION);
-            //json = Request.Get(__VKAPIURL + "ads.createCampaigns").ToString();
-            json = "{\"response\": [{\"id\": 1007074013}, {\"id\":10126540231}]}";
+            string json = Request.Get(__VKAPIURL + "ads.createCampaigns").ToString();
             CreateCampaingResponse campaings = JsonConvert.DeserializeObject<CreateCampaingResponse>(json);
             return campaings;
+        }
+        public GetCampaingResponse GetCampaings()
+        {
+            HttpRequest Request = new Helper().CreateHttpRequest(_CABID, __API_VERSION, _Token);
+            string json = Request.Get(__VKAPIURL + "ads.getCampaigns").ToString();
+            GetCampaingResponse response = JsonConvert.DeserializeObject<GetCampaingResponse>(json);
+            return response;
         }
     }
 }
