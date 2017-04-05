@@ -4,7 +4,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:AdNiva"
-             mc:Ignorable="d" d:DesignWidth="361.445" Height="94.76" MouseEnter="UserControl_MouseEnter" MouseLeave="UserControl_MouseLeave" GotFocus="UserControl_GotFocus" MouseLeftButtonDown="UserControl_MouseLeftButtonDown">
+             mc:Ignorable="d" d:DesignWidth="361.445" Height="94.76" MouseEnter="UserControl_MouseEnter" MouseLeave="UserControl_MouseLeave" MouseLeftButtonDown="UserControl_MouseLeftButtonDown">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="33*"/>
@@ -12,7 +12,7 @@
         </Grid.RowDefinitions>
         <Rectangle Fill="#424242" Stroke="Black" Grid.RowSpan="2"/>
         <Rectangle x:Name="TitleBackground" Fill="#313131" Height="33" Stroke="Black" VerticalAlignment="Top" Grid.Row="0"/>
-        <Label x:Name="campaingTitle" Content="" Margin="10,6,10,5" FontFamily="Global Sans Serif" Foreground="#FFE2E2E2" FontWeight="Bold" Grid.Row="0" FontSize="11"/>
+        <Label x:Name="campaingTitle" Content="" Margin="10,6,50,5" FontFamily="Global Sans Serif" Foreground="#FFE2E2E2" FontWeight="Bold" Grid.Row="0" FontSize="11"/>
         <Grid Margin="10,0,10,10" Grid.Row="1">
             <Grid.RowDefinitions>
                 <RowDefinition/>
@@ -28,10 +28,11 @@
             <Label Content="Общий лимит" Foreground="White" Grid.Row="1" FontSize="10" Margin="7,0,0,0"/>
             <Label Content="Потрачено" Foreground="White" Grid.Column="2" FontSize="10"/>
             <Label Content="CTR" Margin="29,0,0,0" Foreground="White" Grid.Column="2" Grid.Row="1" FontSize="10" Height="25" VerticalAlignment="Bottom"/>
-            <Label Content="0" Grid.Column="1" Foreground="#FF00DCFF" FontSize="10"/>
-            <Label Foreground="#FF00DCFF" FontSize="10" Grid.Column="1" Grid.Row="1" Content="0"/>
-            <Label Content="0" Foreground="#FF00DCFF" FontSize="10" Grid.Column="3"/>
-            <Label Content="0" Foreground="#FF00DCFF" FontSize="10" Grid.Column="3" Grid.Row="1"/>
+            <Label x:Name="DayLim" Content="0" Grid.Column="1" Foreground="#FF00DCFF" FontSize="10"/>
+            <Label x:Name="AllLim" Foreground="#FF00DCFF" FontSize="10" Grid.Column="1" Grid.Row="1" Content="0"/>
+            <Label x:Name="Potracheno" Content="0" Foreground="#FF00DCFF" FontSize="10" Grid.Column="3"/>
+            <Label x:Name="CTR" Content="0" Foreground="#FF00DCFF" FontSize="10" Grid.Column="3" Grid.Row="1"/>
         </Grid>
+        <Label x:Name="AdsCount" Content="" Margin="0,6,0,5" FontFamily="Global Sans Serif" Foreground="#FFE2E2E2" FontWeight="Bold" Grid.Row="0" FontSize="11" HorizontalAlignment="Right" Width="45"/>
     </Grid>
 </UserControl>

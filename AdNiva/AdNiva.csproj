@@ -96,6 +96,9 @@
     <Compile Include="AddButton.xaml.cs">
       <DependentUpon>AddButton.xaml</DependentUpon>
     </Compile>
+    <Compile Include="AdViewer.xaml.cs">
+      <DependentUpon>AdViewer.xaml</DependentUpon>
+    </Compile>
     <Compile Include="AuthForm.xaml.cs">
       <DependentUpon>AuthForm.xaml</DependentUpon>
     </Compile>
@@ -115,6 +118,10 @@
     </Compile>
     <Compile Include="VkAPI.cs" />
     <Page Include="AddButton.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="AdViewer.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

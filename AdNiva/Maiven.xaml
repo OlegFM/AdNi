@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:AdNiva"
         mc:Ignorable="d"
-        Title="AdNiva" Height="300" Width="715.768" ResizeMode="NoResize" WindowState="Maximized" WindowStyle="None">
+        Title="AdNiva" Height="300" Width="715.768" ResizeMode="NoResize" WindowState="Maximized" WindowStyle="None" Loaded="Window_Loaded">
     <Grid x:Name="MainContainer" Background="#555555">
         <Grid Height="100" VerticalAlignment="Top" Background="#333333">
             <Ellipse x:Name="UserIcon" HorizontalAlignment="Left" Height="80" Margin="10,10,0,0" Stroke="Black" VerticalAlignment="Top" Width="80" MouseLeftButtonDown="UserIcon_MouseLeftButtonDown"/>
@@ -21,16 +21,15 @@
             </Grid>
             <Label x:Name="UserName" Content="" Height="30" Margin="95,10,0,0" Foreground="#efefef" VerticalAlignment="Top" HorizontalAlignment="Left" Width="200" FontSize="18"/>
             <Label Content="Баланс кабинета:" HorizontalAlignment="Left" Height="30" Margin="111,54,0,0" VerticalAlignment="Top" Width="137" Foreground="#FFC5BFBF" FontSize="16"/>
-            <Label x:Name="Budget" Content="" HorizontalAlignment="Left" Height="30" Margin="243,54,0,0" VerticalAlignment="Top" Width="52" Foreground="#FFDAD8D8" FontSize="16"/>
+            <Label x:Name="Budget" Content="" HorizontalAlignment="Left" Height="30" Margin="243,54,0,0" VerticalAlignment="Top" Width="400" Foreground="#FFDAD8D8" FontSize="16"/>
         </Grid>
         <Grid x:Name="CampaingColumn" HorizontalAlignment="Left" Margin="10,100,0,10" Width="96" Background="#636363">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition/>
             </Grid.ColumnDefinitions>
-            <ScrollViewer VerticalScrollBarVisibility="Hidden" x:Name="CampaingScroll" Width="100">
-                <StackPanel x:Name="CampaingStack" HorizontalAlignment="Left" CanVerticallyScroll="True">
-                    <Button x:Name="NewCampButon" Content="Новая кампания" Height="30" VerticalAlignment="Top" Click="Button_Click" Foreground="#f5f5f5" Background="#535353"/>
-                </StackPanel>
+            <Button x:Name="NewCampButon" Content="Новая кампания" Height="30" VerticalAlignment="Top" Click="Button_Click" Foreground="#f5f5f5" Background="#535353" Margin="0,0,1,0"/>
+            <ScrollViewer VerticalScrollBarVisibility="Hidden" x:Name="CampaingScroll" Margin="0,30,0,0">
+                <StackPanel x:Name="CampaingStack" HorizontalAlignment="Left" CanVerticallyScroll="True"/>
             </ScrollViewer>
         </Grid>
         <Grid x:Name="AdsColumn" HorizontalAlignment="Left" Margin="111,100,0,10" Width="98" Background="#636363">

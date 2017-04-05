@@ -74,6 +74,34 @@ namespace AdNiva
         public string id { get; set; }
     }
     /// <summary>
+    /// Сериализованные данные от метода GetAds
+    /// </summary>
+    public class GetAdsResponseBody
+    {
+        public int id { get; set; }
+        public int campaign_id { get; set; }
+        public string name { get; set; }
+        public int status { get; set; }
+        public string approved { get; set; }
+        public string all_limit { get; set; }
+        public string create_time { get; set; }
+        public string update_time { get; set; }
+        public string age_restriction { get; set; }
+        public string category1_id { get; set; }
+        public string category2_id { get; set; }
+        public int cost_type { get; set; }
+        public int ad_format { get; set; }
+        public string cpm { get; set; }
+        public int impressions_limit { get; set; }
+        public string ad_platform { get; set; }
+    }
+    public class GetAdsResponse
+    {
+        public List<GetAdsResponseBody> response { get; set; }
+        public Error error { get; set; }
+    }
+
+    /// <summary>
     /// Сериализованные данные от метода GetCampaings
     /// </summary>
     public class GetCampaingResponse
@@ -318,9 +346,9 @@ namespace AdNiva
         /// Получает баланс кабинета.
         /// </summary>
         /// <returns></returns>
-        public double GetBudget()
+        public string GetBudget()
         {
-            double Budget = -200.00;
+            string Budget = "Доступно только владельцу";
             Dictionary<string, string> SBudget = new Dictionary<string, string>();
             HttpRequest GetBudget = new HttpRequest();
             GetBudget.AddUrlParam("account_id", _CABID);
@@ -331,8 +359,7 @@ namespace AdNiva
             if (Result.Contains("response"))
             {
                 SBudget = JsonConvert.DeserializeObject<Dictionary<string, string>>(Result);
-                string x = SBudget["response"];
-                Budget = Convert.ToDouble(x);
+                Budget = SBudget["response"];
             }
             return Budget;
         }
@@ -358,6 +385,22 @@ namespace AdNiva
             HttpRequest Request = new Helper().CreateHttpRequest(_CABID, __API_VERSION, _Token);
             string json = Request.Get(__VKAPIURL + "ads.getCampaigns").ToString();
             GetCampaingResponse response = JsonConvert.DeserializeObject<GetCampaingResponse>(json);
+            return response;
+        }
+        public GetCampaingResponse GetCampaing(string id)
+        {
+            HttpRequest Request = new Helper().CreateHttpRequest(_CABID, __API_VERSION, _Token);
+            Request.AddUrlParam("campaign_ids", "{\"id\":" + id + "}");
+            string json = Request.Get(__VKAPIURL + "ads.getCampaigns").ToString();
+            GetCampaingResponse response = JsonConvert.DeserializeObject<GetCampaingResponse>(json);
+            return response;
+        }
+        public GetAdsResponse GetAds(string id)
+        {
+            HttpRequest Request = new Helper().CreateHttpRequest(_CABID, __API_VERSION, _Token);
+            Request.AddUrlParam("campaign_ids", "{\"id\":" + id + "}");
+            string json = Request.Get(__VKAPIURL + "ads.getAds").ToString();
+            GetAdsResponse response = JsonConvert.DeserializeObject<GetAdsResponse>(json);
             return response;
         }
     }

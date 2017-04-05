@@ -75,27 +75,12 @@ namespace AdNiva
             start_info.FontWeight = FontWeights.Thin;
             start_info.Foreground = new SolidColorBrush(Colors.Azure);
             InformationColumn.Children.Add(start_info);
-
-            //Получение общей статистики
-            Budget.Content = API.GetBudget().ToString();
-
-            //Получение кампаний из кабинета
-            GetCampaingResponse load = API.GetCampaings();
-            if (load.response != null)
-            {
-                for (int i = 0; i < load.response.Count; i++)
-                {
-                    CampaingViewer viewer = new CampaingViewer(load.response[i].id);
-                    viewer.Click += Choose_Camp;
-                    viewer.campaingTitle.Content = load.response[i].name;
-                    CampaingStack.Children.Add(viewer);
-                }
-            }
         }
 
         private void UserIcon_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
             UserSettings window = new UserSettings();
+            window.Save += LoadCampaigns;
             window.Show();
         }
 
@@ -118,18 +103,111 @@ namespace AdNiva
         }
         private void Add_Campaing(CreateCampaingResponse response)
         {
-            
-            for (int i = 0; i < 10; i++)
-            {
-                CampaingViewer viewer = new CampaingViewer(i+1);
-                viewer.Click += Choose_Camp;
-                viewer.campaingTitle.Content = "Привет, Андрей #" + i.ToString();
-                CampaingStack.Children.Add(viewer);
-            }
+            GetCampaingResponse add = API.GetCampaing(response.response[0].id);
+            CampaingViewer viewer = new CampaingViewer(add.response[0].id);
+            viewer.Click += Choose_Camp;
+            viewer.campaingTitle.Content = add.response[0].name;
+            viewer.DayLim.Content = add.response[0].day_limit;
+            viewer.AllLim.Content = add.response[0].all_limit;
+            CampaingStack.Children.Add(viewer);
         }
         private void Choose_Camp(int id)
         {
-            start_ads.Content = id.ToString();
+            AdsColumn.Children.Remove(start_ads);
+            if(AdsStack.Children.Count > 0)
+            {
+                AdsStack.Children.RemoveRange(0, AdsStack.Children.Count);
+            }
+            GetAdsResponse ads = API.GetAds(id.ToString());
+            if(ads.response != null)
+            {
+                foreach (GetAdsResponseBody ad in ads.response)
+                {
+                    AdViewer viewer = new AdViewer(ad.id);
+                    viewer.AdTitle.Content = ad.name;
+                    viewer.CPM.Content = ad.cpm;
+                    viewer.Limit.Content = ad.all_limit;
+                    viewer.Chouse += Ad_Chouse;
+                    AdsStack.Children.Add(viewer);
+                }
+            }
+            foreach (CampaingViewer ad in CampaingStack.Children)
+            {
+                if (ad.IsChosen)
+                {
+                    ad.IsChosen = false;
+                    ad.TitleBackground.Fill = new SolidColorBrush(new Color { R = 44, B = 44, G = 44, A = 255 });
+                    ad.TitleBackground.Stroke = new SolidColorBrush(Colors.Black);
+                    ad.TitleBackground.StrokeThickness = ad.strokeThin;
+                }
+                if (ad.check)
+                {
+                    ad.IsChosen = true;
+                    ad.check = false;
+                }
+            }
+        }
+
+        private void Ad_Chouse()
+        {
+            foreach (AdViewer ad in AdsStack.Children)
+            {
+                if (ad.IsChosen)
+                {
+                    ad.IsChosen = false;
+                    ad.TitleBackground.Fill = new SolidColorBrush(new Color { R = 44, B = 44, G = 44, A = 255 });
+                    ad.TitleBackground.Stroke = new SolidColorBrush(Colors.Black);
+                    ad.TitleBackground.StrokeThickness = ad.strokeThin;
+                }
+                if (ad.check)
+                {
+                    ad.IsChosen = true;
+                    ad.check = false;
+                }
+            }
+            
+        }
+
+        private void LoadCampaigns() {
+            //Получение кампаний из кабинета
+            if (CampaingStack.Children.Count > 0)
+            {
+                CampaingStack.Children.RemoveRange(0, CampaingStack.Children.Count - 1);
+            }
+            API = new VkAPI(Properties.Settings.Default.AccessToken);
+            Refresh_Budget();
+            GetCampaingResponse load = API.GetCampaings();
+            if (load.response != null)
+            {
+                for (int i = 0; i < load.response.Count; i++)
+                {
+                    System.Threading.Thread.Sleep(500);
+                    CampaingViewer viewer = new CampaingViewer(load.response[i].id);
+                    GetAdsResponse ads = API.GetAds(load.response[i].id.ToString());
+                    viewer.Click += Choose_Camp;
+                    viewer.campaingTitle.Content = load.response[i].name;
+                    viewer.DayLim.Content = load.response[i].day_limit;
+                    viewer.AllLim.Content = load.response[i].all_limit;
+                    if (ads.response == null)
+                    {
+                        viewer.AdsCount.Content = "err:"+ads.error.error_code;
+                    }
+                    else
+                    {
+                        viewer.AdsCount.Content = ads.response.Count;
+                    }
+                        CampaingStack.Children.Add(viewer);
+                }
+            }
+        }
+        private void Refresh_Budget()
+        {
+            Budget.Content = API.GetBudget();
+        }
+
+        private void Window_Loaded(object sender, RoutedEventArgs e)
+        {
+            LoadCampaigns();
         }
     }
 }

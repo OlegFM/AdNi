@@ -19,6 +19,8 @@ namespace AdNiva
     /// </summary>
     public partial class UserSettings : Window
     {
+        public delegate void AppSettings();
+        public event AppSettings Save;
         public UserSettings()
         {
             InitializeComponent();
@@ -30,6 +32,7 @@ namespace AdNiva
         {
             Properties.Settings.Default.AdCabinetID = AdCabinetID.Text;
             Properties.Settings.Default.Save();
+            Save();
             this.Close();
         }
 
