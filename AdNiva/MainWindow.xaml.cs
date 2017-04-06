@@ -14,6 +14,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using xNet;
 using Newtonsoft.Json;
+using Microsoft.HockeyApp;
 
 namespace AdNiva
 {

@@ -125,7 +125,15 @@ namespace AdNiva
                 {
                     AdViewer viewer = new AdViewer(ad.id);
                     viewer.AdTitle.Content = ad.name;
-                    viewer.CPM.Content = ad.cpm;
+                    if (ad.cpm == null)
+                    {
+                        viewer.CPM.Content = ad.cpc.Insert(ad.cpc.Length-2, ".");
+                        viewer.CPLable.Content = "CPC";
+                    }
+                    else
+                    {
+                        viewer.CPM.Content = ad.cpm.Insert(ad.cpm.Length - 2, ".");
+                    }
                     viewer.Limit.Content = ad.all_limit;
                     viewer.Chouse += Ad_Chouse;
                     AdsStack.Children.Add(viewer);

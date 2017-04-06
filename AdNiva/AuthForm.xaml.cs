@@ -24,14 +24,7 @@ namespace AdNiva
         public AuthForm()
         {
             InitializeComponent();
-            string Path = Environment.GetFolderPath(Environment.SpecialFolder.Cookies);
-            try
-            {
-                System.IO.Directory.Delete(Path, true);
-            }
-            catch (Exception)
-            {
-            }
+            
 
         }
 

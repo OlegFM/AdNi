@@ -92,6 +92,7 @@ namespace AdNiva
         public int cost_type { get; set; }
         public int ad_format { get; set; }
         public string cpm { get; set; }
+        public string cpc { get; set; }
         public int impressions_limit { get; set; }
         public string ad_platform { get; set; }
     }

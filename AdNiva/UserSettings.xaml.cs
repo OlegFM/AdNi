@@ -44,6 +44,14 @@ namespace AdNiva
         private void Button_Click(object sender, RoutedEventArgs e)
         {
             Properties.Settings.Default.Reset();
+            string Path = Environment.GetFolderPath(Environment.SpecialFolder.Cookies);
+            try
+            {
+                System.IO.Directory.Delete(Path, true);
+            }
+            catch (Exception)
+            {
+            }
             MainWindow Login = new MainWindow();
             Login.Show();
             this.Close();

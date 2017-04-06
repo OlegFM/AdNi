@@ -54,7 +54,7 @@
                 <Binding Path="Valid"></Binding>
             </Button.IsEnabled>
         </Button>
-        <TextBox x:Name="start_time_hour" HorizontalAlignment="Left" Height="40" Margin="372,433,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="70" Validation.Error="Validation_Error">
+        <TextBox x:Name="start_time_hour" HorizontalAlignment="Left" Height="40" Margin="372,433,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="70" Validation.Error="Validation_Error" FontSize="18">
             <TextBox.Text>
                 <Binding Path="start_time_hour" UpdateSourceTrigger="PropertyChanged" NotifyOnValidationError="True">
                     <Binding.ValidationRules>
@@ -63,7 +63,7 @@
                 </Binding>
             </TextBox.Text>
         </TextBox>
-        <TextBox x:Name="start_time_minute" HorizontalAlignment="Left" Height="40" Margin="473,433,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="70" Validation.Error="Validation_Error">
+        <TextBox x:Name="start_time_minute" HorizontalAlignment="Left" Height="40" Margin="473,433,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="70" Validation.Error="Validation_Error" FontSize="18">
             <TextBox.Text>
                 <Binding Path="start_time_minute" UpdateSourceTrigger="PropertyChanged" NotifyOnValidationError="True">
                     <Binding.ValidationRules>
@@ -72,7 +72,7 @@
                 </Binding>
             </TextBox.Text>
         </TextBox>
-        <TextBox x:Name="stop_time_hour" HorizontalAlignment="Left" Height="40" Margin="372,526,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="70" RenderTransformOrigin="0.471,1.272" Validation.Error="Validation_Error">
+        <TextBox x:Name="stop_time_hour" HorizontalAlignment="Left" Height="40" Margin="372,526,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="70" RenderTransformOrigin="0.471,1.272" Validation.Error="Validation_Error" FontSize="18">
             <TextBox.Text>
                 <Binding Path="stop_time_hour" UpdateSourceTrigger="PropertyChanged" NotifyOnValidationError="True" >
                     <Binding.ValidationRules>
@@ -81,7 +81,7 @@
                 </Binding>
             </TextBox.Text>
         </TextBox>
-        <TextBox x:Name="stop_time_minute" HorizontalAlignment="Left" Height="40" Margin="473,526,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="70" Validation.Error="Validation_Error">
+        <TextBox x:Name="stop_time_minute" HorizontalAlignment="Left" Height="40" Margin="473,526,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="70" Validation.Error="Validation_Error" FontSize="18">
             <TextBox.Text>
                 <Binding Path="stop_time_minute" UpdateSourceTrigger="PropertyChanged" NotifyOnValidationError="True">
                     <Binding.ValidationRules>

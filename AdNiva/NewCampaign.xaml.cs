@@ -55,14 +55,14 @@ namespace AdNiva
         }
         private void Validation_Error(object sender, ValidationErrorEventArgs e)
         {
-        //    if (data.Val.Contains(false))
-        //    {
-        //        CreateCamp.IsEnabled = false;
-        //    }
-        //    else
-        //    {
-        //        CreateCamp.IsEnabled = true;
-        //    }
+            if (data.Val.Contains(false))
+            {
+                CreateCamp.IsEnabled = false;
+            }
+            else
+            {
+                CreateCamp.IsEnabled = true;
+            }
         }
     }
 }
