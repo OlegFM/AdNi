@@ -113,10 +113,17 @@ namespace AdNiva
         }
         private void Choose_Camp(int id)
         {
+            NewAds.Visibility = Visibility.Visible;
             AdsColumn.Children.Remove(start_ads);
             if(AdsStack.Children.Count > 0)
             {
                 AdsStack.Children.RemoveRange(0, AdsStack.Children.Count);
+
+            }
+            else
+            {
+                start_ads.Content = "У вас нет ни одного рекламного объявления. Кажется, настало время создать новые ;-)";
+                AdsColumn.Children.Add(start_ads);
             }
             GetAdsResponse ads = API.GetAds(id.ToString());
             if(ads.response != null)
@@ -180,7 +187,7 @@ namespace AdNiva
             //Получение кампаний из кабинета
             if (CampaingStack.Children.Count > 0)
             {
-                CampaingStack.Children.RemoveRange(0, CampaingStack.Children.Count - 1);
+                CampaingStack.Children.RemoveRange(0, CampaingStack.Children.Count);
             }
             API = new VkAPI(Properties.Settings.Default.AccessToken);
             Refresh_Budget();
@@ -196,6 +203,7 @@ namespace AdNiva
                     viewer.campaingTitle.Content = load.response[i].name;
                     viewer.DayLim.Content = load.response[i].day_limit;
                     viewer.AllLim.Content = load.response[i].all_limit;
+                    viewer.SetStatus(load.response[i].status);
                     if (ads.response == null)
                     {
                         viewer.AdsCount.Content = "err:"+ads.error.error_code;
@@ -216,6 +224,12 @@ namespace AdNiva
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
             LoadCampaigns();
+        }
+
+        private void NewAds_Click(object sender, RoutedEventArgs e)
+        {
+            AdsCreator window = new AdsCreator();
+            window.Show();
         }
     }
 }

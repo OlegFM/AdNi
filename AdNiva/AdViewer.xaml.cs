@@ -37,7 +37,7 @@ namespace AdNiva
         {
             if (!IsChosen)
             {
-                TitleBackground.Fill = new SolidColorBrush(new Color { R=56, G=112, B=109 , A=255 });
+                TitleBackground.Fill = new SolidColorBrush(new Color { R = 56, G = 112, B = 109, A = 255 });
 
             }
         }
@@ -56,6 +56,24 @@ namespace AdNiva
             TitleBackground.Stroke = new SolidColorBrush(new Color { R = 55, G = 183, B = 174, A = 255 });
             TitleBackground.StrokeThickness = 3;
             Chouse();
+        }
+
+        private void SetStatus(int status)
+        {
+            switch (status)
+            {
+                case 0:
+                    Indicator.Fill = new SolidColorBrush(Colors.Red);
+                    Indicator.ToolTip = "Остановлено";
+                    break;
+                case 1:
+                    Indicator.Fill = new SolidColorBrush(Colors.Green);
+                    Indicator.ToolTip = "Запущено";
+                    break;
+                case 2:
+                    Indicator.Fill = new SolidColorBrush(Colors.Blue);
+                    break;
+            }
         }
     }
 }

@@ -16,8 +16,8 @@ namespace AdNiva
     {
         private async void Application_Startup(object sender, StartupEventArgs e)
         {
-            HockeyClient.Current.Configure("8494df31ede646ebbf86ca08783cbaba");
-            await HockeyClient.Current.SendCrashesAsync(true);
+          //  HockeyClient.Current.Configure("8494df31ede646ebbf86ca08783cbaba");
+          //  await HockeyClient.Current.SendCrashesAsync(true);
         }
     }
 }

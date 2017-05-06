@@ -57,5 +57,23 @@ namespace AdNiva
             TitleBackground.StrokeThickness = 3;
             Click(this.id);
         }
+        public void SetStatus(int status)
+        {
+            switch (status)
+            {
+                case 0:
+                    Indicator.Fill = new SolidColorBrush(Colors.Red);
+                    Indicator.ToolTip = "Остановлена";
+                    break;
+                case 1:
+                    Indicator.Fill = new SolidColorBrush(Colors.Green);
+                    Indicator.ToolTip = "Запущена";
+                    break;
+                case 2:
+                    Indicator.Fill = new SolidColorBrush(Colors.Blue);
+                    break;
+            }
+
+        }
     }
 }

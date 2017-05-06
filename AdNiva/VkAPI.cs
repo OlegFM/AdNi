@@ -7,6 +7,7 @@ using System.ComponentModel;
 using System.Windows.Input;
 using System.Windows.Controls;
 using System.Data;
+using System.Dynamic;
 
 namespace AdNiva
 {
@@ -74,6 +75,42 @@ namespace AdNiva
         public string id { get; set; }
     }
     /// <summary>
+    /// Объект создаваемого объявления
+    /// </summary>
+    public class CreateAdsObject
+    {
+        public string account_id { get; set; }
+        public CreateAdsBody data { get; set; }
+    }
+    public class CreateAdsBody
+    {
+        public int campaign_id { get; set; }
+        public int ad_format { get; set; }
+        public int cost_type { get; set; }
+        //public string cpc { get; set; }
+        //public string cpm { get; set; }
+        //public int impressions_limit { get; set; }
+        //public int impressions_limited { get; set; }
+        public string ad_platform { get; set; }
+        //public string ad_platform_no_wall { get; set; }
+        public string all_limit { get; set; }
+        public int category1_id { get; set; }
+        public int category2_id { get; set; }
+        public int age_restriction { get; set; }
+        public int status { get; set; }
+        public string name { get; set; }
+        public string title { get; set; }
+        public string description { get; set; }
+        public string link_url { get; set; }
+        //public string link_domain { get; set; }
+        public string photo { get; set; }
+        public int disclaimer_medical { get; set; }
+        public int disclaimer_specialist { get; set; }
+        public int disclaimer_supplements { get; set; }
+
+    }
+
+    /// <summary>
     /// Сериализованные данные от метода GetAds
     /// </summary>
     public class GetAdsResponseBody
@@ -96,6 +133,25 @@ namespace AdNiva
         public int impressions_limit { get; set; }
         public string ad_platform { get; set; }
     }
+    /// <summary>
+    /// Десериализованные данные категорий
+    /// </summary>
+    public class GetCategoriesResponse
+    {
+        public List<GetCategoriesBody> response { get; set; }
+    }
+    public class GetCategoriesBody
+    {
+        public int id { get; set; }
+        public string name { get; set; }
+        public List<GetCategoriesSub> subcategories { get; set; }
+    }
+    public class GetCategoriesSub
+    {
+        public int id { get; set; }
+        public string name { get; set; }
+    }
+
     public class GetAdsResponse
     {
         public List<GetAdsResponseBody> response { get; set; }
@@ -402,6 +458,14 @@ namespace AdNiva
             Request.AddUrlParam("campaign_ids", "{\"id\":" + id + "}");
             string json = Request.Get(__VKAPIURL + "ads.getAds").ToString();
             GetAdsResponse response = JsonConvert.DeserializeObject<GetAdsResponse>(json);
+            return response;
+        }
+        public GetCategoriesResponse GetCategories()
+        {
+            HttpRequest Request = new Helper().CreateHttpRequest(_CABID, __API_VERSION, _Token);
+            Request.AddUrlParam("lang", "ru");
+            string json = Request.Get(__VKAPIURL + "ads.getCategories").ToString();
+            GetCategoriesResponse response = JsonConvert.DeserializeObject<GetCategoriesResponse>(json);
             return response;
         }
     }

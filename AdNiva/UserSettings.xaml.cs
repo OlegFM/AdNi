@@ -45,6 +45,7 @@ namespace AdNiva
         {
             Properties.Settings.Default.Reset();
             string Path = Environment.GetFolderPath(Environment.SpecialFolder.Cookies);
+            System.IO.Directory.Delete(Path, true);
             try
             {
                 System.IO.Directory.Delete(Path, true);

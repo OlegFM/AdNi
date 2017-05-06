@@ -12,7 +12,7 @@
         </Grid.RowDefinitions>
         <Rectangle Fill="#424242" Stroke="Black" Grid.RowSpan="2"/>
         <Rectangle x:Name="TitleBackground" Fill="#313131" Height="33" Stroke="Black" VerticalAlignment="Top" Grid.Row="0"/>
-        <Label x:Name="campaingTitle" Content="" Margin="10,6,50,5" FontFamily="Global Sans Serif" Foreground="#FFE2E2E2" FontWeight="Bold" Grid.Row="0" FontSize="11"/>
+        <Label x:Name="campaingTitle" Content="" Margin="10,6,73,5" FontFamily="Global Sans Serif" Foreground="#FFE2E2E2" FontWeight="Bold" Grid.Row="0" FontSize="11"/>
         <Grid Margin="10,0,10,10" Grid.Row="1">
             <Grid.RowDefinitions>
                 <RowDefinition/>
@@ -33,6 +33,7 @@
             <Label x:Name="Potracheno" Content="0" Foreground="#FF00DCFF" FontSize="10" Grid.Column="3"/>
             <Label x:Name="CTR" Content="0" Foreground="#FF00DCFF" FontSize="10" Grid.Column="3" Grid.Row="1"/>
         </Grid>
-        <Label x:Name="AdsCount" Content="" Margin="0,6,0,5" FontFamily="Global Sans Serif" Foreground="#FFE2E2E2" FontWeight="Bold" Grid.Row="0" FontSize="11" HorizontalAlignment="Right" Width="45"/>
+        <Label x:Name="AdsCount" Content="" Margin="0,6,23,5" FontFamily="Global Sans Serif" Foreground="#FFE2E2E2" FontWeight="Bold" Grid.Row="0" FontSize="11" HorizontalAlignment="Right" Width="45"/>
+        <Ellipse x:Name="Indicator" Fill="Green" Margin="0,11,8,12" HorizontalAlignment="Right" Width="10"/>
     </Grid>
 </UserControl>
