@@ -12,6 +12,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using Newtonsoft.Json;
 
 namespace AdNiva
 {
@@ -163,11 +164,17 @@ namespace AdNiva
             {
                 foreach (GetCategoriesBody item in categories.response)
                 {
-                    GetCategoriesSub category1 = item.subcategories.Find(x => x.name == Category1.SelectedValue.ToString());
-                    Ad.category1_id = category1_id;
+                    if (item.subcategories != null)
+                    {
+                        if (item.subcategories.Find(x => x.name == Category1.SelectedValue.ToString()) != null)
+                        {
+                            GetCategoriesSub category1 = item.subcategories.Find(x => x.name == Category1.SelectedValue.ToString());
+                            Ad.category1_id = category1.id;
+                        }
+                    }
                 }
             }
-            if (Category2.SelectedItem != null)
+            if (Category2.SelectedValue != null)
             {
                 if (categories.response.Find(x => x.name == Category2.SelectedValue.ToString()) != null)
                 {
@@ -178,13 +185,20 @@ namespace AdNiva
                 {
                     foreach (GetCategoriesBody item in categories.response)
                     {
-                        GetCategoriesSub category1 = item.subcategories.Find(x => x.name == Category2.SelectedValue.ToString());
-                        Ad.category2_id = category1.id;
+                        if (item.subcategories != null)
+                        {
+                            if (item.subcategories.Find(x => x.name == Category2.SelectedValue.ToString()) != null)
+                            {
+                                GetCategoriesSub category1 = item.subcategories.Find(x => x.name == Category2.SelectedValue.ToString());
+                                Ad.category2_id = category1.id;
+                            }
+                        }
                     }
                 }
             }
             //***************************************************************************************************************
-            
+            string test = JsonConvert.SerializeObject(Ad);
+            AdName.Text = test;
             
         }
     }
