@@ -1,0 +1,98 @@
+﻿<Window x:Class="AdNiva.NewCampaign"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:AdNiva"
+        mc:Ignorable="d"
+        Title="NewCampaign" Height="713.253" Width="730.12" WindowStyle="None" WindowStartupLocation="CenterScreen" SizeToContent="WidthAndHeight">
+    <Grid>
+        <TextBox x:Name="Name" Height="40" Margin="40,126,0,0" TextWrapping="Wrap" VerticalAlignment="Top" FontSize="18" HorizontalAlignment="Left" Width="636" Validation.Error="Validation_Error">
+            <TextBox.Text>
+                <Binding Path="name" UpdateSourceTrigger="PropertyChanged" NotifyOnValidationError="True">
+                    <Binding.ValidationRules>
+                        <DataErrorValidationRule />
+                    </Binding.ValidationRules>
+                </Binding>
+            </TextBox.Text>
+        </TextBox>
+        <Label Content="Название кампании  (от 3 до 60 символов)" HorizontalAlignment="Left" Height="45" Margin="40,76,0,0" VerticalAlignment="Top" Width="418" FontSize="16"/>
+        <TextBox x:Name="ClientId" HorizontalAlignment="Left" Height="40" Margin="40,216,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="250" FontSize="18"/>
+        <Label Content="ID клиента (только для агентств)" HorizontalAlignment="Left" Margin="40,171,0,0" VerticalAlignment="Top" RenderTransformOrigin="-0.135,0.509" Height="40" Width="250" FontSize="16"/>
+        <ComboBox x:Name="CampaingType" HorizontalAlignment="Left" Height="40" Margin="394,216,0,0" VerticalAlignment="Top" Width="282" FontSize="18">
+            <ComboBoxItem Content="Обычная кампания" IsSelected="True"/>
+            <ComboBoxItem Content="Реклама в сообществе"/>
+        </ComboBox>
+        <Label Content="Вид кампании" HorizontalAlignment="Left" Height="40" Margin="394,171,0,0" VerticalAlignment="Top" Width="282" FontSize="16"/>
+        <TextBox x:Name="DayLimit" HorizontalAlignment="Left" Height="40" Margin="40,331,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="250" FontSize="18" Validation.Error="Validation_Error">
+            <TextBox.Text>
+                <Binding Path="day_limit" UpdateSourceTrigger="PropertyChanged" NotifyOnValidationError="True" NotifyOnSourceUpdated="True">
+                    <Binding.ValidationRules>
+                        <DataErrorValidationRule />
+                    </Binding.ValidationRules>
+                </Binding>
+            </TextBox.Text>
+        </TextBox>
+        <TextBox x:Name="AllLimit" HorizontalAlignment="Left" Height="40" Margin="394,331,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="282" FontSize="18" Validation.Error="Validation_Error">
+            <TextBox.Text>
+                <Binding Path="all_limit" UpdateSourceTrigger="PropertyChanged" NotifyOnValidationError="True" NotifyOnSourceUpdated="True">
+                    <Binding.ValidationRules>
+                        <DataErrorValidationRule />
+                    </Binding.ValidationRules>
+                </Binding>
+            </TextBox.Text>
+        </TextBox>
+        <Label Content="Дневной лимит" HorizontalAlignment="Left" Margin="40,286,0,0" VerticalAlignment="Top" Height="40" Width="250" FontSize="16"/>
+        <Label Content="Общий лимит" HorizontalAlignment="Left" Margin="394,286,0,0" VerticalAlignment="Top" Height="40" Width="282" FontSize="16"/>
+        <DatePicker x:Name="StartDate" HorizontalAlignment="Left" Height="40" Margin="40,433,0,0" VerticalAlignment="Top" Width="282" FontSize="18" SelectedDateFormat="Short" />
+        <DatePicker x:Name="StopDate" HorizontalAlignment="Left" Height="40" Margin="40,526,0,0" VerticalAlignment="Top" Width="282" FontSize="18" SelectedDateFormat="Short"/>
+        <Label Content="Время запуска кампании" HorizontalAlignment="Left" Height="37" Margin="40,391,0,0" VerticalAlignment="Top" Width="250" FontSize="16"/>
+        <Label Content="Время остановки кампании" HorizontalAlignment="Left" Height="37" Margin="40,484,0,0" VerticalAlignment="Top" Width="250" FontSize="16"/>
+        <CheckBox x:Name="Status" Content="Запустить кампанию" HorizontalAlignment="Left" Margin="40,597,0,81" Width="282" FontSize="18"/>
+        <Button x:Name="CreateCamp" Content="Создать кампанию" Height="46" Margin="394,585,46,0" VerticalAlignment="Top" FontSize="18" Click="Button_Click" Width="282">
+            <Button.IsEnabled>
+                <Binding Path="Valid"></Binding>
+            </Button.IsEnabled>
+        </Button>
+        <TextBox x:Name="start_time_hour" HorizontalAlignment="Left" Height="40" Margin="372,433,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="70" Validation.Error="Validation_Error" FontSize="18">
+            <TextBox.Text>
+                <Binding Path="start_time_hour" UpdateSourceTrigger="PropertyChanged" NotifyOnValidationError="True">
+                    <Binding.ValidationRules>
+                        <DataErrorValidationRule />
+                    </Binding.ValidationRules>
+                </Binding>
+            </TextBox.Text>
+        </TextBox>
+        <TextBox x:Name="start_time_minute" HorizontalAlignment="Left" Height="40" Margin="473,433,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="70" Validation.Error="Validation_Error" FontSize="18">
+            <TextBox.Text>
+                <Binding Path="start_time_minute" UpdateSourceTrigger="PropertyChanged" NotifyOnValidationError="True">
+                    <Binding.ValidationRules>
+                        <DataErrorValidationRule />
+                    </Binding.ValidationRules>
+                </Binding>
+            </TextBox.Text>
+        </TextBox>
+        <TextBox x:Name="stop_time_hour" HorizontalAlignment="Left" Height="40" Margin="372,526,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="70" RenderTransformOrigin="0.471,1.272" Validation.Error="Validation_Error" FontSize="18">
+            <TextBox.Text>
+                <Binding Path="stop_time_hour" UpdateSourceTrigger="PropertyChanged" NotifyOnValidationError="True" >
+                    <Binding.ValidationRules>
+                        <DataErrorValidationRule />
+                    </Binding.ValidationRules>
+                </Binding>
+            </TextBox.Text>
+        </TextBox>
+        <TextBox x:Name="stop_time_minute" HorizontalAlignment="Left" Height="40" Margin="473,526,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="70" Validation.Error="Validation_Error" FontSize="18">
+            <TextBox.Text>
+                <Binding Path="stop_time_minute" UpdateSourceTrigger="PropertyChanged" NotifyOnValidationError="True">
+                    <Binding.ValidationRules>
+                        <DataErrorValidationRule />
+                    </Binding.ValidationRules>
+                </Binding>
+            </TextBox.Text>
+        </TextBox>
+        <Label Content="Часы" HorizontalAlignment="Left" Margin="372,391,0,0" VerticalAlignment="Top" Width="70" Height="30" FontSize="16"/>
+        <Label Content="Минуты" HorizontalAlignment="Left" Margin="473,391,0,0" VerticalAlignment="Top" Width="70" Height="30" FontSize="16"/>
+        <Label Content="Часы" HorizontalAlignment="Left" Margin="372,488,0,0" VerticalAlignment="Top" Width="70" Height="30" FontSize="16"/>
+        <Label Content="Минуты" HorizontalAlignment="Left" Margin="473,488,0,0" VerticalAlignment="Top" Width="70" Height="30" FontSize="16"/>
+    </Grid>
+</Window>
