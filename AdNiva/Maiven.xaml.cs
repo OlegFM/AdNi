@@ -35,12 +35,12 @@ namespace AdNiva
             WebClient Downloader = new WebClient();
             try
             {
-                Downloader.DownloadFile(UserInfo["photo_100"], "Resources/" + System.IO.Path.GetFileName(UserInfo["photo_100"]));
+                Downloader.DownloadFile(UserInfo["photo_100"], @"Resources/" + System.IO.Path.GetFileName(UserInfo["id"]));
                 Downloader.Dispose();
             }
             catch { }
 
-            BitmapImage Icon = new BitmapImage(new Uri("Resources/" + System.IO.Path.GetFileName(UserInfo["photo_100"]), UriKind.Relative)) ;
+            BitmapImage Icon = new BitmapImage(new Uri(@"Resources/" + System.IO.Path.GetFileName(UserInfo["id"]), UriKind.Relative));
             ImageBrush I = new ImageBrush(Icon);
             UserIcon.Fill = I;
 

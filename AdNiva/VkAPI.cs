@@ -393,6 +393,7 @@ namespace AdNiva
             GetUserInfo.AddUrlParam("user_ids", Properties.Settings.Default.UserID);
             string Params = "photo_100,first_name,last_name,";
             GetUserInfo.AddUrlParam("fields", Params);
+            GetUserInfo.AddUrlParam("access_token", _Token);
             GetUserInfo.AddUrlParam("v", __API_VERSION);
             string Result = GetUserInfo.Get(__VKAPIURL + "users.get").ToString();
             Result = Result.Substring(13, Result.Length - 15);
